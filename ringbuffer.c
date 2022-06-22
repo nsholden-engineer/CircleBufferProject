@@ -13,7 +13,7 @@ ringbuffer_h ringbuffer_init(int size) {
 	// Implement init here
 	ringbuffer_h newRing = malloc(sizeof(ringbuffer_t));
 	newRing->buffer = malloc(sizeof(uint32_t) * size);
-	newRing->head = 0;
+	newRing->head = 0; //initialize head and tail to 0
 	newRing->tail = 0;
 	newRing->maxLength = size;
 	return newRing;
@@ -81,6 +81,8 @@ int ringbuffer_empty(ringbuffer_h ring) {
  */
 int ringbuffer_full(ringbuffer_h ring) {
 	// implement full here
+
+	(ring->tail >= ring->size) ? return 0 : return 1;
 	errno = ENOSYS;
 	return -1;
 }
@@ -112,6 +114,9 @@ int ringbuffer_remaining(ringbuffer_h ring) {
  */
 int ringbuffer_destroy(ringbuffer_h ring) {
 	// implement destroy here
+
+	free(ring->buffer);
+	free(ring);
 	errno = ENOSYS;
 	return -1;
 }
