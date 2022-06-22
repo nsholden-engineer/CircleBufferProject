@@ -66,6 +66,8 @@ int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
  */
 int ringbuffer_empty(ringbuffer_h ring) {
 	// implement empty here
+
+	(ring->head == ring->tail) ? (return 0) : (return 1);
 	errno = ENOSYS;
 	return -1;
 }
@@ -82,7 +84,7 @@ int ringbuffer_empty(ringbuffer_h ring) {
 int ringbuffer_full(ringbuffer_h ring) {
 	// implement full here
 
-	(ring->tail >= ring->size) ? return 0 : return 1;
+	(ring->tail >= ring->size) ? (return 0) : (return 1);
 	errno = ENOSYS;
 	return -1;
 }
