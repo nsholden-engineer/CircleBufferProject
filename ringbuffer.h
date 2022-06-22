@@ -3,12 +3,13 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <errno.h>
+#include <stdlib.h>
 
 typedef struct ringbuffer {
 	// implement ringbuffer handle struct here
 	uint32_t * buffer;
 	int head, tail;
-	const int maxLength;
+	int maxLength;
 } ringbuffer_t;
 
 typedef ringbuffer_t *ringbuffer_h;
