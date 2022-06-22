@@ -8,7 +8,8 @@
 typedef struct ringbuffer {
 	// implement ringbuffer handle struct here
 	uint32_t * buffer;
-	int head, tail;
+	uint32_t * head;
+	uint32_t * tail;
 	int maxLength;
 } ringbuffer_t;
 
