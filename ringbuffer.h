@@ -6,6 +6,9 @@
 
 typedef struct ringbuffer {
 	// implement ringbuffer handle struct here
+	uint32_t * buffer;
+	int head, tail;
+	const int maxLength;
 } ringbuffer_t;
 
 typedef ringbuffer_t *ringbuffer_h;

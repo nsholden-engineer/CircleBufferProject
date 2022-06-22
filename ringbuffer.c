@@ -11,6 +11,14 @@
  */
 ringbuffer_h ringbuffer_init(int size) {
 	// Implement init here
+	ringbuffer_h newRing;
+	newRing->buffer = (uint32_t*) malloc(sizeof(uint32_t) * size);
+	newRing->head = 0;
+	newRing->tail = 0;
+	newRing->maxLength = size;
+	return newRing;
+
+
 	errno = ENOSYS;
 	return NULL;
 }
