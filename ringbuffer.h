@@ -10,7 +10,7 @@ typedef struct ringbuffer {
 	uint32_t * buffer;
 	uint32_t * head;
 	uint32_t * tail;
-	int maxLength;
+	int maxLength, currentSize;
 } ringbuffer_t;
 
 typedef ringbuffer_t *ringbuffer_h;

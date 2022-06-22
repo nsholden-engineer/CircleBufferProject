@@ -41,6 +41,7 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 		return -1;
 	*(ring->tail) = value;
 	ring->tail += sizeof(uint32_t);
+	ring->currentSize++;
 	return 0;
 	
 	errno = ENOSYS;
@@ -74,7 +75,7 @@ int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
  */
 int ringbuffer_empty(ringbuffer_h ring) {
 	// implement empty here
-	uint8_t ret = (ring->head == ring->tail) ? (0) : (1);
+	uint8_t ret = (ring->currentSize == 0) ? (0) : (1);
 	return ret;
 	errno = ENOSYS;
 	return -1;
@@ -92,7 +93,7 @@ int ringbuffer_empty(ringbuffer_h ring) {
 int ringbuffer_full(ringbuffer_h ring) {
 	// implement full here
 
-	uint8_t ret = (ring->tail >= ring->maxLength) ? (0) : (1);
+	uint8_t ret = (ring->currentSize >= ring->maxLength) ? (0) : (1);
 	return ret;
 	errno = ENOSYS;
 	return -1;
