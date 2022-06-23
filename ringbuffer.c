@@ -98,7 +98,7 @@ int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
 	if(ring->head > ring->buffer + ring->maxLength)
 		ring->head = ring->buffer;
 	ring->currentSize--;
-	if(!(ringbuffer_empty(ring))
+	if(!(ringbuffer_empty(ring)))
 		ring->tail +=1;
 	return 0;
 }
