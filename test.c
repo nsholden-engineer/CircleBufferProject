@@ -69,6 +69,6 @@ int smoketest2()
 }
 	
 int main(int argc, char** argv) {
-	//return smoketest();
-	return smoketest2();
+	return smoketest();
+	//return smoketest2();
 }
