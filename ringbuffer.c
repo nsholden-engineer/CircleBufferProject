@@ -50,6 +50,8 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 	}
 
 	ring->tail +=1;
+	if (ring->tail >= ring->buffer + ring->maxLength)
+		ring->tail = ring->buffer;
 	*(ring->tail) = value;
 	ring->currentSize++;
 	return 0;
@@ -73,6 +75,8 @@ int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
 
 	*value = *(ring->head);
 	ring->head +=1;
+	if(ring->head > ring->buffer + ring->maxLength)
+		ring->head = ring->buffer;
 	ring->currentSize--;
 	return 0;
 	errno = ENOSYS;
