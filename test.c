@@ -64,9 +64,17 @@ int smoketest2()
 		printf("%d, ", check);
 	}
 	printf("]\n");
+	//Test for Adding to a now empty ring
+	for(int i = 0; i < 10; i++)
+	{
+		if (ringbuffer_push(ring, values[i])) 
+		{
+			printf("ringbuffer_push returned unsuccessful\n");
+			return 1;
+		}	
+	}
 
 	int ret = smoketest();
-	
 	return ret;
 }
 	
