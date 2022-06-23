@@ -8,6 +8,37 @@
  */
 
 
+ int test_print(ringbuffer_h)
+ {
+	 printf("Current Buffer Structure is:\n[");
+	 for(int i = 0; i < ring->maxLenght; i++)
+	 {
+		 if(ring->buffer[i] > 20)
+		 {
+			 printf("X, ");
+		 }
+		 else
+		 {
+			 printf("%d", ring->buffer[i]);
+		 }
+		 if((&ring->buffer[i]) == ring->head)
+		 {
+			 printf("H");
+		 }
+		 if((&ring->buffer[i]) == ring->tail)
+		 {
+			 printf("T");
+		 }
+		 if(i < ring->maxLength-1)
+		 {
+			 printf(", ");
+		 }
+	 }
+	 printf("]\n");
+
+	 return 0;
+ }
+
 int smoketest() {
 	ringbuffer_h ring;
 	int32_t value;
@@ -62,7 +93,7 @@ int smoketest2()
 	}
 	
 	printf("ST2: Remaining Slots in buffer is: %d after push of %d.\n", ringbuffer_remaining(ring), firstPushSize);
-
+	test_print(ring);
 	printf("ST2: The following pops are: [");
 	for(int i = 0; i < firstPopSize; i++)
 	{
@@ -81,7 +112,7 @@ int smoketest2()
 	// Testing ringbuffer_remaining() function
 
 	printf("ST2: Remaining Slots in buffer is: %d after pop of %d.\n", ringbuffer_remaining(ring), firstPopSize);
-
+	test_print(ring);
 	// Test for Adding to a now empty ring where head and tail have moved
 	for(int i = 0; i < secondPushSize; i++)
 	{
@@ -93,7 +124,7 @@ int smoketest2()
 	}
 
 	printf("ST2: Remaining Slots in buffer is: %d after push of %d.\n", ringbuffer_remaining(ring), secondPushSize);
-
+	test_print(ring);
 	printf("ST2: The following pops are: [");
 	for(int i = 0; i < secondPopSize; i++)
 	{
@@ -110,7 +141,7 @@ int smoketest2()
 	printf("]\n");
 
 	printf("ST2: Remaining Slots in buffer is: %d after pop of %d.\n", ringbuffer_remaining(ring), secondPopSize);
-
+	test_print(ring);
 	ringbuffer_destroy(ring);
 
 	return 0;
