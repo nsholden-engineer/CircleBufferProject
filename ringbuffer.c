@@ -11,6 +11,13 @@
  */
 ringbuffer_h ringbuffer_init(int size) {
 	// Implement init here
+
+	if(size < 1)
+	{
+		errno = ENOSYS;
+		return NULL;
+	}
+
 	ringbuffer_h newRing = malloc(sizeof(ringbuffer_t));
 	newRing->buffer = malloc(sizeof(uint32_t) * size);
 	newRing->head = newRing->buffer; //initialize head and tail to first element
@@ -18,10 +25,6 @@ ringbuffer_h ringbuffer_init(int size) {
 	newRing->maxLength = size;
 	newRing->currentSize = 0;
 	return newRing;
-
-
-	errno = ENOSYS;
-	return NULL;
 }
 
 /*
@@ -37,10 +40,14 @@ ringbuffer_h ringbuffer_init(int size) {
 int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 	// Implement push here
 
-	//Check for full ring buffer
+	// Check for full ring buffer
 	if(!(ringbuffer_full(ring)))
+	{
+		errno = ENOSYS;
 		return -1;
-
+	}
+	// Check for empty ring buffer
+	// If so, set zeroth element to value
 	if(!(ringbuffer_empty(ring)))
 	{
 		*(ring->tail) = value;
@@ -49,15 +56,16 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 
 	}
 
+	// Otherwise move tail to the next spot up and
+	// Set next element to value
 	ring->tail +=1;
+	// If tail would go past the edge of ring buffer, loop to beginning
 	if (ring->tail >= ring->buffer + ring->maxLength)
 		ring->tail = ring->buffer;
+	// Set tail location to value
 	*(ring->tail) = value;
 	ring->currentSize++;
 	return 0;
-	
-	errno = ENOSYS;
-	return -1;
 }
 
 /*
@@ -73,14 +81,22 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
 	// Implement pop here
 
+	// Fail if attempting to pop element from empty ring buffer
+	if(!(ringbuffer_empty(ring)))
+	{
+		errno = ENOSYS;
+		return -1;
+	}
+
+	// Set value to head value
 	*value = *(ring->head);
 	ring->head +=1;
+	// After incrementing head, if it goes off edge, loop back
+	// To beginning
 	if(ring->head > ring->buffer + ring->maxLength)
 		ring->head = ring->buffer;
 	ring->currentSize--;
 	return 0;
-	errno = ENOSYS;
-	return -1;
 }
 
 /*
@@ -129,6 +145,8 @@ int ringbuffer_full(ringbuffer_h ring) {
  */
 int ringbuffer_remaining(ringbuffer_h ring) {
 	// implement remaining here
+	return (ring->maxLength - ring->currentSize);
+
 	errno = ENOSYS;
 	return -1;
 }

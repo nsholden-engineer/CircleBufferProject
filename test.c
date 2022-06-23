@@ -64,7 +64,12 @@ int smoketest2()
 		printf("%d, ", check);
 	}
 	printf("]\n");
-	//Test for Adding to a now empty ring
+
+	// Testing ringbuffer_remaining() function
+
+	printf("Remaining Slots in buffer is/are: %d.\n", ringbuffer_remaining(ring));
+
+	// Test for Adding to a now empty ring where head and tail have moved
 	for(int i = 0; i < 10; i++)
 	{
 		if (ringbuffer_push(ring, values[i])) 
@@ -74,11 +79,12 @@ int smoketest2()
 		}	
 	}
 
-	int ret = smoketest();
-	return ret;
+	return 0;
 }
 	
 int main(int argc, char** argv) {
-	//return smoketest();
-	return smoketest2();
+	smoketest();
+	smoketest2();
+
+	return 0;
 }
