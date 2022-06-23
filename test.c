@@ -30,7 +30,7 @@ int smoketest() {
 
 	if (value != 1) {
 		printf("Expected value 1, but got %d\n", value);
-		printf("Address of Ring is %p\n, Address of value is %p\n", &ring, &value);
+		printf("Address of Ring is %d\n, Address of value is %d\n", *ring->buffer, value);
 		return 1;
 	}
 
