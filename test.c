@@ -83,7 +83,7 @@ int smoketest2()
 		}	
 	}
 
-	printf("Remaining Slots in buffer is/are: %d.\n", ringbuffer_remaining(ring));
+	printf("Remaining Slots in buffer is: %d.\n", ringbuffer_remaining(ring));
 
 	ringbuffer_destroy(ring);
 

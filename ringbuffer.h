@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <errno.h>
+
+// Included stdlib.h for malloc usage
 #include <stdlib.h>
 
 typedef struct ringbuffer {
