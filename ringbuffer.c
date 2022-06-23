@@ -73,7 +73,7 @@ int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
 	// Implement pop here
 
 	*value = *(ring->head);
-	ring->head += sizeof(uint32_t);
+	ring->head ++;
 	ring->currentSize--;
 	return 0;
 	errno = ENOSYS;
