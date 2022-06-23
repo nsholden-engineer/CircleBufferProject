@@ -52,7 +52,7 @@ int smoketest2()
 			return 1;
 		}	
 	}
-	/*
+	
 	printf("The current array is : [");
 	for(int i = 0; i < 10; i++)
 	{
@@ -64,7 +64,7 @@ int smoketest2()
 		printf("%d, ", check);
 	}
 	printf("]\n");
-	*/
+	
 	return 0;
 }
 	

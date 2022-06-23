@@ -44,13 +44,12 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 	if(!(ringbuffer_empty(ring)))
 	{
 		*(ring->tail) = value;
-		ring->tail ++;
 		ring->currentSize++;
 		return 0;
 
 	}
 
-	ring->tail ++;
+	ring->tail +=1;
 	*(ring->tail) = value;
 	ring->currentSize++;
 	return 0;
@@ -73,7 +72,7 @@ int ringbuffer_pop(ringbuffer_h ring, int32_t *value) {
 	// Implement pop here
 
 	*value = *(ring->head);
-	ring->head ++;
+	ring->head +=1;
 	ring->currentSize--;
 	return 0;
 	errno = ENOSYS;
