@@ -44,13 +44,13 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 	if(!(ringbuffer_empty(ring)))
 	{
 		*(ring->tail) = value;
-		ring->tail += sizeof(uint32_t);
+		ring->tail ++;
 		ring->currentSize++;
 		return 0;
 
 	}
 
-	ring->tail += sizeof(uint32_t);
+	ring->tail ++;
 	*(ring->tail) = value;
 	ring->currentSize++;
 	return 0;
