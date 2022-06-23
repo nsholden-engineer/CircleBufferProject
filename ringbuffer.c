@@ -12,13 +12,15 @@
 ringbuffer_h ringbuffer_init(int size) {
 	// Implement init here
 
+	// Scrub negative input, and no point in making a
+	// Zero-size buffer
 	if(size < 1)
 	{
 		errno = ENOSYS;
 		return NULL;
 	}
 
-	ringbuffer_h newRing = malloc(sizeof(ringbuffer_t));
+	ringbuffer_h newRing;// = malloc(sizeof(ringbuffer_t));
 	newRing->buffer = malloc(sizeof(uint32_t) * size);
 	newRing->head = newRing->buffer; //initialize head and tail to first element
 	newRing->tail = newRing->buffer;
@@ -165,7 +167,7 @@ int ringbuffer_destroy(ringbuffer_h ring) {
 	// implement destroy here
 
 	free(ring->buffer);
-	free(ring);
+	//free(ring);
 	errno = ENOSYS;
 	return -1;
 }
