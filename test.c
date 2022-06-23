@@ -50,7 +50,7 @@ int smoketest2()
 	int secondPopSize = 2;
 
 	ring = ringbuffer_init(bufSize);
-	printf("ST2: Buffer Size is %d.\n", )
+	printf("ST2: Buffer Size is %d.\n", bufSize);
 
 	for(int i = 0; i < firstPushSize; i++)
 	{
