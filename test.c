@@ -55,7 +55,7 @@ int smoketest2()
 		}	
 	}
 	
-	printf("Remaining Slots in buffer is/are: %d.\n", ringbuffer_remaining(ring));
+	printf("Remaining Slots in buffer is: %d.\n", ringbuffer_remaining(ring));
 
 	printf("The current array is : [");
 	for(int i = 0; i < 5; i++)
@@ -71,7 +71,7 @@ int smoketest2()
 
 	// Testing ringbuffer_remaining() function
 
-	printf("Remaining Slots in buffer is/are: %d.\n", ringbuffer_remaining(ring));
+	printf("Remaining Slots in buffer is: %d.\n", ringbuffer_remaining(ring));
 
 	// Test for Adding to a now empty ring where head and tail have moved
 	for(int i = 0; i < 10; i++)
