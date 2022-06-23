@@ -43,7 +43,7 @@ int smoketest2()
 	int32_t check;
 
 	ring = ringbuffer_init(10);
-
+	/*
 	for(int i = 0; i < 10; i++)
 	{
 		if (ringbuffer_push(ring, values[i])) 
@@ -64,11 +64,11 @@ int smoketest2()
 		printf("%d, ", check);
 	}
 	printf("]\n");
-
+	*/
 	return 0;
 }
 	
 int main(int argc, char** argv) {
-	return smoketest();
-	//return smoketest2();
+	//return smoketest();
+	return smoketest2();
 }
