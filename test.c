@@ -39,8 +39,8 @@ int smoketest() {
 int smoketest2()
 {
 	ringbuffer_h ring;
-	int32_t values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8 ,9};
-	int32_t check;
+	//int32_t values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8 ,9};
+	//int32_t check;
 
 	ring = ringbuffer_init(10);
 	/*
