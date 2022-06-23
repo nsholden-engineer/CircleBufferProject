@@ -20,7 +20,7 @@ ringbuffer_h ringbuffer_init(int size) {
 		return NULL;
 	}
 
-	ringbuffer_h newRing;// = malloc(sizeof(ringbuffer_t));
+	ringbuffer_h newRing = malloc(sizeof(ringbuffer_t));
 	newRing->buffer = malloc(sizeof(uint32_t) * size);
 	newRing->head = newRing->buffer; //initialize head and tail to first element
 	newRing->tail = newRing->buffer;
@@ -167,7 +167,7 @@ int ringbuffer_destroy(ringbuffer_h ring) {
 	// implement destroy here
 
 	free(ring->buffer);
-	//free(ring);
+	free(ring);
 	errno = ENOSYS;
 	return -1;
 }
