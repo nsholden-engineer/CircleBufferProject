@@ -43,10 +43,16 @@ int smoketest2()
 	ringbuffer_h ring;
 	int32_t values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	int32_t check;
+	int bufSize = 10;
+	int firstPushSize = 5;
+	int firstPopSize = 5;
+	int secondPushSize = 10;
+	int secondPopSize = 2;
 
-	ring = ringbuffer_init(10);
+	ring = ringbuffer_init(bufSize);
+	printf("ST2: Buffer Size is %d.\n", )
 
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < firstPushSize; i++)
 	{
 		if (ringbuffer_push(ring, values[i])) 
 		{
@@ -55,26 +61,29 @@ int smoketest2()
 		}	
 	}
 	
-	printf("Remaining Slots in buffer is: %d.\n", ringbuffer_remaining(ring));
+	printf("ST2: Remaining Slots in buffer is: %d after push of %d.\n", ringbuffer_remaining(ring), firstPushSize);
 
-	printf("The current array is : [");
-	for(int i = 0; i < 5; i++)
+	printf("ST2: The following pops are: [");
+	for(int i = 0; i < firstPopSize; i++)
 	{
 		if(ringbuffer_pop(ring, &check))
 		{
 			printf("ringbuffer_pop returned unsuccessful\n");
 			return 1;
 		}
-		printf("%d, ", check);
+		if(i < firstPopSize - 1)
+			printf("%d, ", check);
+		else
+			printf("%d", check);
 	}
 	printf("]\n");
 
 	// Testing ringbuffer_remaining() function
 
-	printf("Remaining Slots in buffer is: %d.\n", ringbuffer_remaining(ring));
+	printf("ST2: Remaining Slots in buffer is: %d after pop of %d.\n", ringbuffer_remaining(ring), firstPopSize);
 
 	// Test for Adding to a now empty ring where head and tail have moved
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < secondPushSize; i++)
 	{
 		if (ringbuffer_push(ring, values[i])) 
 		{
@@ -83,7 +92,24 @@ int smoketest2()
 		}	
 	}
 
-	printf("Remaining Slots in buffer is: %d.\n", ringbuffer_remaining(ring));
+	printf("ST2: Remaining Slots in buffer is: %d after push of %d.\n", ringbuffer_remaining(ring), secondPushSize);
+
+	printf("ST2: The following pops are: [");
+	for(int i = 0; i < secondPopSize; i++)
+	{
+		if(ringbuffer_pop(ring, &check))
+		{
+			printf("ringbuffer_pop returned unsuccessful\n");
+			return 1;
+		}
+		if(i < secondPopSize - 1)
+			printf("%d, ", check);
+		else
+			printf("%d", check);
+	}
+	printf("]\n");
+
+	printf("ST2: Remaining Slots in buffer is: %d after pop of %d.\n", ringbuffer_remaining(ring), secondPopSize);
 
 	ringbuffer_destroy(ring);
 
