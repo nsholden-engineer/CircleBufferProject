@@ -76,8 +76,8 @@ int smoketest2()
 	int32_t check;
 	int bufSize = 10;
 	int firstPushSize = 5;
-	int firstPopSize = 4;
-	int secondPushSize = 9;
+	int firstPopSize = 5;
+	int secondPushSize = 10;
 	int secondPopSize = 2;
 
 	ring = ringbuffer_init(bufSize);
