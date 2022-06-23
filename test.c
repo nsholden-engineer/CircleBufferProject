@@ -146,9 +146,88 @@ int smoketest2()
 
 	return 0;
 }
+
+int smoketest3()
+{
+	ringbuffer_h ring;
+	int32_t values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	int32_t check;
+	int bufSize = 10;
+	int firstPushSize = 5;
+	int firstPopSize = 4;
+	int secondPushSize = 9;
+	int secondPopSize = 4;
+
+	ring = ringbuffer_init(bufSize);
+	printf("ST3: Buffer Size is %d.\n", bufSize);
+
+	for(int i = 0; i < firstPushSize; i++)
+	{
+		if (ringbuffer_push(ring, values[i])) 
+		{
+			printf("ringbuffer_push returned unsuccessful\n");
+			return 1;
+		}	
+	}
+	
+	printf("ST3: Remaining Slots in buffer is: %d after push of %d.\n", ringbuffer_remaining(ring), firstPushSize);
+	test_print(ring);
+	printf("ST3: The following pops are: [");
+	for(int i = 0; i < firstPopSize; i++)
+	{
+		if(ringbuffer_pop(ring, &check))
+		{
+			printf("ringbuffer_pop returned unsuccessful\n");
+			return 1;
+		}
+		if(i < firstPopSize - 1)
+			printf("%d, ", check);
+		else
+			printf("%d", check);
+	}
+	printf("]\n");
+
+	// Testing ringbuffer_remaining() function
+
+	printf("ST3: Remaining Slots in buffer is: %d after pop of %d.\n", ringbuffer_remaining(ring), firstPopSize);
+	test_print(ring);
+	// Test for Adding to a now empty ring where head and tail have moved
+	for(int i = 0; i < secondPushSize; i++)
+	{
+		if (ringbuffer_push(ring, values[i])) 
+		{
+			printf("ringbuffer_push returned unsuccessful\n");
+			return 1;
+		}	
+	}
+
+	printf("ST3: Remaining Slots in buffer is: %d after push of %d.\n", ringbuffer_remaining(ring), secondPushSize);
+	test_print(ring);
+	printf("ST3: The following pops are: [");
+	for(int i = 0; i < secondPopSize; i++)
+	{
+		if(ringbuffer_pop(ring, &check))
+		{
+			printf("ringbuffer_pop returned unsuccessful\n");
+			return 1;
+		}
+		if(i < secondPopSize - 1)
+			printf("%d, ", check);
+		else
+			printf("%d", check);
+	}
+	printf("]\n");
+
+	printf("ST3: Remaining Slots in buffer is: %d after pop of %d.\n", ringbuffer_remaining(ring), secondPopSize);
+	test_print(ring);
+	ringbuffer_destroy(ring);
+
+	return 0;
+}
 	
 int main(int argc, char** argv) {
 	smoketest2();
+	smoketest3();
 
 	return smoketest();
 }
