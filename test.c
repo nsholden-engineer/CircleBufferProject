@@ -50,12 +50,14 @@ int smoketest2()
 	}
 	
 	printf("The current array is : [");
-	for(i = 0; i < 10; i++)
+	for(int i = 0; i < 10; i++)
 	{
 		ringbuffer_pop(ring, &check);
 		printf("%d, ", check);
 	}
 	printf("]\n");
+
+	return 0;
 }
 	
 int main(int argc, char** argv) {
