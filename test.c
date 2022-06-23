@@ -53,6 +53,8 @@ int smoketest2()
 		}	
 	}
 	
+	printf("Remaining Slots in buffer is/are: %d.\n", ringbuffer_remaining(ring));
+
 	printf("The current array is : [");
 	for(int i = 0; i < 5; i++)
 	{
@@ -78,6 +80,8 @@ int smoketest2()
 			return 1;
 		}	
 	}
+
+	printf("Remaining Slots in buffer is/are: %d.\n", ringbuffer_remaining(ring));
 
 	return 0;
 }
