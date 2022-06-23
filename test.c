@@ -39,6 +39,9 @@
 	 return 0;
  }
 
+ /*
+  * smoketest2() tests for full-data pops
+ */
 int smoketest() {
 	ringbuffer_h ring;
 	int32_t value;
@@ -147,6 +150,9 @@ int smoketest2()
 	return 0;
 }
 
+/*
+ * smoketest3() Test for non full-data pops
+*/
 int smoketest3()
 {
 	ringbuffer_h ring;
