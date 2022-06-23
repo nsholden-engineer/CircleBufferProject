@@ -46,13 +46,21 @@ int smoketest2()
 
 	for(int i = 0; i < 10; i++)
 	{
-		ringbuffer_push(ring, values[i]);
+		if (ringbuffer_push(ring, values[i])) 
+		{
+			printf("ringbuffer_push returned unsuccessful\n");
+			return 1;
+		}	
 	}
 	
 	printf("The current array is : [");
 	for(int i = 0; i < 10; i++)
 	{
-		ringbuffer_pop(ring, &check);
+		if(ringbuffer_pop(ring, &check));
+		{
+			printf("ringbuffer_pop returned unsuccessful\n");
+			return 1;
+		}
 		printf("%d, ", check);
 	}
 	printf("]\n");
