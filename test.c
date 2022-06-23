@@ -42,7 +42,7 @@ int smoketest2()
 	int32_t values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8 ,9};
 	int32_t check;
 
-	ringbuffer_init(10);
+	ring = ringbuffer_init(10);
 
 	for(int i = 0; i < 10; i++)
 	{
