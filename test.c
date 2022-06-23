@@ -64,8 +64,10 @@ int smoketest2()
 		printf("%d, ", check);
 	}
 	printf("]\n");
+
+	int ret = smoketest();
 	
-	return 0;
+	return ret;
 }
 	
 int main(int argc, char** argv) {
