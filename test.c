@@ -30,13 +30,35 @@ int smoketest() {
 
 	if (value != 1) {
 		printf("Expected value 1, but got %d\n", value);
-		printf("Address of Ring is %d\n, Address of value is %d\n", *ring->buffer, value);
 		return 1;
 	}
 
 	return 0;
 }
+
+int smoketest2()
+{
+	ringbuffer_h ring;
+	int32_t values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8 ,9};
+	int32_t check;
+
+	ringbuffer_init(10);
+
+	for(int i = 0; i < 10; i++)
+	{
+		ringbuffer_push(ring, values[i]);
+	}
+	
+	printf("The current array is : [");
+	for(i = 0; i < 10; i++)
+	{
+		ringbuffer_pop(ring, &check);
+		printf("%d, ", check);
+	}
+	printf("]\n");
+}
 	
 int main(int argc, char** argv) {
-	return smoketest();
+	//return smoketest();
+	return smoketest2();
 }
