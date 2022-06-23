@@ -8,10 +8,10 @@
  */
 
 
- int test_print(ringbuffer_h)
+ int test_print(ringbuffer_h ring)
  {
 	 printf("Current Buffer Structure is:\n[");
-	 for(int i = 0; i < ring->maxLenght; i++)
+	 for(int i = 0; i < ring->maxLength; i++)
 	 {
 		 if(ring->buffer[i] > 20)
 		 {
