@@ -16,6 +16,7 @@ ringbuffer_h ringbuffer_init(int size) {
 	newRing->head = newRing->buffer; //initialize head and tail to first element
 	newRing->tail = newRing->buffer;
 	newRing->maxLength = size;
+	newRing->currentSize = 0;
 	return newRing;
 
 
@@ -40,9 +41,17 @@ int ringbuffer_push(ringbuffer_h ring, int32_t value) {
 	if(!(ringbuffer_full(ring)))
 		return -1;
 
+	if(!(ringbuffer_empty(ring)))
+	{
+		*(ring->tail) = value;
+		ring->tail += sizeof(uint32_t);
+		ring->currentSize++;
+		return 0;
+
+	}
 
 	ring->tail += sizeof(uint32_t);
-	*(ring->tail + sizeof(uint32_t)) = value;
+	*(ring->tail) = value;
 	ring->currentSize++;
 	return 0;
 	
