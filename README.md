@@ -1,3 +1,3 @@
-# JCI-TakeHomeProject
+# CircleBufferProject
 Circle Buffer Project
-"Take Home" Project for Johnson Controls
+Project Implements and Tests Circular Ring Buffer in C
